@@ -1,8 +1,9 @@
 import app from "./app";
-import { prisma } from "./lib/prisma";
+import config from "./config";
+import prisma from "./lib/prisma";
 import "dotenv/config";
 
-const PORT = process.env.PORT;
+const PORT = config.port;
 
 async function main ()
 {
@@ -20,6 +21,7 @@ async function main ()
     catch (error)
     {
         console.error(error);
+        await prisma.$disconnect();
         process.exit(1);
     }
 }
